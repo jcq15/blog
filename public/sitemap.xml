@@ -2,71 +2,71 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://example.com/post/first/</loc>
+    <loc>http://blog.shadiao.online/post/first/</loc>
     <lastmod>2021-02-21T01:35:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/</loc>
+    <loc>http://blog.shadiao.online/</loc>
     <lastmod>2021-02-21T01:35:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/</loc>
+    <loc>http://blog.shadiao.online/post/</loc>
     <lastmod>2021-02-21T01:35:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/aplayer/</loc>
+    <loc>http://blog.shadiao.online/tags/aplayer/</loc>
     <lastmod>2021-01-10T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/aplayer-test/</loc>
+    <loc>http://blog.shadiao.online/post/aplayer-test/</loc>
     <lastmod>2021-01-10T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/test/</loc>
+    <loc>http://blog.shadiao.online/tags/test/</loc>
     <lastmod>2021-01-10T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/css/</loc>
+    <loc>http://blog.shadiao.online/tags/css/</loc>
     <lastmod>2020-05-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/html/</loc>
+    <loc>http://blog.shadiao.online/tags/html/</loc>
     <lastmod>2020-05-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/markdown/</loc>
+    <loc>http://blog.shadiao.online/tags/markdown/</loc>
     <lastmod>2020-05-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/markdown-syntax/</loc>
+    <loc>http://blog.shadiao.online/post/markdown-syntax/</loc>
     <lastmod>2020-05-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/themes/</loc>
+    <loc>http://blog.shadiao.online/tags/themes/</loc>
     <lastmod>2020-05-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/about/</loc>
+    <loc>http://blog.shadiao.online/about/</loc>
     <lastmod>2020-04-11T19:15:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/math-typesetting/</loc>
+    <loc>http://blog.shadiao.online/post/math-typesetting/</loc>
     <lastmod>2020-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/placeholder-text/</loc>
+    <loc>http://blog.shadiao.online/post/placeholder-text/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/text/</loc>
+    <loc>http://blog.shadiao.online/tags/text/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/emoji/</loc>
+    <loc>http://blog.shadiao.online/tags/emoji/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/emoji-support/</loc>
+    <loc>http://blog.shadiao.online/post/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/cjk/</loc>
+    <loc>http://blog.shadiao.online/tags/cjk/</loc>
     <lastmod>2018-03-09T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/cjk-unicode-test/</loc>
+    <loc>http://blog.shadiao.online/post/cjk-unicode-test/</loc>
     <lastmod>2018-03-09T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/wtf/</loc>
+    <loc>http://blog.shadiao.online/tags/wtf/</loc>
     <lastmod>2017-04-01T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/wtf-article/</loc>
+    <loc>http://blog.shadiao.online/post/wtf-article/</loc>
     <lastmod>2017-04-01T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/archives/</loc>
+    <loc>http://blog.shadiao.online/archives/</loc>
   </url><url>
-    <loc>https://example.com/search/</loc>
+    <loc>http://blog.shadiao.online/search/</loc>
   </url>
 </urlset>
