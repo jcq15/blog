@@ -16,5 +16,14 @@
       <description>你好，世界 土死了，怎么又是“你好，世界”，能不能换一句啊？ 不能。</description>
     </item>
     
+    <item>
+      <title>关于</title>
+      <link>http://blog.shadiao.online/about/</link>
+      <pubDate>Sat, 20 Feb 2021 19:15:32 +0800</pubDate>
+      
+      <guid>http://blog.shadiao.online/about/</guid>
+      <description>分享一些奇奇怪怪的东西。</description>
+    </item>
+    
   </channel>
 </rss>
