@@ -1,5 +1,5 @@
 +++
-title = "Archives"
+title = "全部文章"
 description = ""
 +++
 

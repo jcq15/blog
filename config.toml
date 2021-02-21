@@ -1,5 +1,5 @@
 baseURL = "http://blog.shadiao.online"
-title = "Hugo Theme Fuji"
+title = "沙雕园"
 
 theme = "fuji"
 hasCJKLanguage = true
@@ -31,11 +31,11 @@ paginate = 10
   post = "/:section/:filename/" # Custom post links, e.g. "/:year/:month/:title/"
 
 [params]
-  author = "DSRKafuU" # You can also set author in post front matter individually
-  subTitle = "A minimal Hugo theme."
+  author = "精神病人" # You can also set author in post front matter individually
+  subTitle = "博客。"
 
   # Source URL of the website, will appear in the footer
-  sourceURL = "https://github.com/itsme/my_blog"
+  sourceURL = "https://github.com/jcq15/blog"
 
   # Use CloudFlare Workers to accelerate the Google Analytics
   # If you are using this please comment the googleAnalytics above
@@ -52,14 +52,13 @@ paginate = 10
   showReadTime = false
 
   # License in the footer
-  showLicenseInFooter = false
-
+  showLicenseInFooter = true
   # License at the end of each post
-  showLicense = true
+  showLicense = false
   showToc = true
 
   # Copyright
-  copyrightStartYear = "2020"
+  copyrightStartYear = "2021"
 
   # Open Graph & Twitter Card variables
   # You can also set description and images in post front matter individually
@@ -115,35 +114,35 @@ paginate = 10
 
 [menu]
   [[menu.nav]]
-    name = "Home"
+    name = "主页"
     url = "/"
     weight = 1
   [[menu.nav]]
-    name = "Archives"
+    name = "文章"
     url = "/archives/"
     weight = 2
   [[menu.nav]]
-    name = "About"
+    name = "关于"
     url = "/about/"
     weight = 3
   [[menu.nav]]
-    name = "Search"
+    name = "搜索"
     url = "/search/"
     weight = 4
-  [[menu.nav]]
-    name = "RSS"
-    url = "/index.xml"
-    weight = 5
+  #[[menu.nav]]
+  #  name = "RSS"
+  #  url = "/index.xml"
+  #  weight = 5
 
   [[menu.link]]
     name = "GitHub"
-    url = "https://github.com/dsrkafuu"
+    url = "https://github.com/jcq15"
     weight = 1
-  [[menu.link]]
-    name = "Twitter"
-    url = "https://twitter.com/dsrkafuu"
-    weight = 2
-  [[menu.link]]
-    name = "bilibili"
-    url = "https://space.bilibili.com/19767474"
-    weight = 3
+  #[[menu.link]]
+  #  name = "Twitter"
+  #  url = "https://twitter.com/dsrkafuu"
+  #  weight = 2
+  #[[menu.link]]
+  #  name = "bilibili"
+  #  url = "https://space.bilibili.com/19767474"
+  #  weight = 3
