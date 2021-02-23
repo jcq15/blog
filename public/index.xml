@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>沙雕园</title>
-    <link>http://blog.shadiao.online/</link>
+    <link>https://blog.shadiao.online/</link>
     <description>Recent content on 沙雕园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
-    <lastBuildDate>Sun, 21 Feb 2021 01:35:32 +0800</lastBuildDate><atom:link href="http://blog.shadiao.online/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Feb 2021 21:13:04 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>First</title>
-      <link>http://blog.shadiao.online/post/first/</link>
-      <pubDate>Sun, 21 Feb 2021 01:35:32 +0800</pubDate>
+      <title>Python 速查表</title>
+      <link>https://blog.shadiao.online/post/python/</link>
+      <pubDate>Mon, 22 Feb 2021 21:13:04 +0800</pubDate>
       
-      <guid>http://blog.shadiao.online/post/first/</guid>
-      <description>你好，世界 土死了，怎么又是“你好，世界”，能不能换一句啊？ 不能。</description>
+      <guid>https://blog.shadiao.online/post/python/</guid>
+      <description>&lt;p&gt;我们经常会用到 Python 的各种库，坠痛苦的就是有一些实用的命令记不住，用的时候只好现查，而且这个效率 efficiency…… 所以啊，我整了这么个速查表，以后直接在这里找就好了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>关于</title>
-      <link>http://blog.shadiao.online/about/</link>
+      <link>https://blog.shadiao.online/about/</link>
       <pubDate>Sat, 20 Feb 2021 19:15:32 +0800</pubDate>
       
-      <guid>http://blog.shadiao.online/about/</guid>
+      <guid>https://blog.shadiao.online/about/</guid>
       <description>分享一些奇奇怪怪的东西。</description>
     </item>
     

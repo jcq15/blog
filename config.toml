@@ -1,4 +1,4 @@
-baseURL = "http://blog.shadiao.online"
+baseURL = "https://blog.shadiao.online"
 title = "沙雕园"
 
 theme = "fuji"
