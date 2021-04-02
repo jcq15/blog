@@ -22,7 +22,7 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>沙雕园 - 博客。</title>
+<title>CentOS 8 配置 tensorflow GPU - 沙雕园</title>
 
 
 <meta name="author" content="精神病人" />
@@ -31,13 +31,16 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
+<meta name="keywords" content="技术" />
 
-<meta property="og:title" content="沙雕园" />
-<meta name="twitter:title" content="沙雕园" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://blog.shadiao.online/" /><meta property="og:image" content="https://blog.shadiao.online/img/og.png" />
+
+<meta property="og:title" content="CentOS 8 配置 tensorflow GPU" />
+<meta name="twitter:title" content="CentOS 8 配置 tensorflow GPU" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.shadiao.online/post/centos8/" /><meta property="og:description" content="记录一下给腾讯云 GPU 服务器安装 tensorflow-gpu 的过程。这玩意事挺多。 检查必要的东西 检查 Python 版本： $ python3 腾讯云自带了 Python3.6。如果没有就装一下。 验证系统是否有支持 CUDA 的 GPU： $ lspci | grep -i nvidia 确认系统已经安装了 gcc：" />
+<meta name="twitter:description" content="记录一下给腾讯云 GPU 服务器安装 tensorflow-gpu 的过程。这玩意事挺多。 检查必要的东西 检查 Python 版本： $ python3 腾讯云自带了 Python3.6。如果没有就装一下。 验证系统是否有支持 CUDA 的 GPU： $ lspci | grep -i nvidia 确认系统已经安装了 gcc：" /><meta property="og:image" content="https://blog.shadiao.online/img/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://blog.shadiao.online/img/og.png" /><meta property="og:updated_time" content="2021-04-02T00:00:26+08:00" />
+<meta name="twitter:image" content="https://blog.shadiao.online/img/og.png" /><meta property="article:published_time" content="2021-04-02T00:00:26+08:00" /><meta property="article:modified_time" content="2021-04-02T00:00:26+08:00" />
 
 
 <style>
@@ -92,10 +95,8 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-
-
-
-<div class="post">
+<article>
+    
     <h2 class="post-item post-title">
         <a href="https://blog.shadiao.online/post/centos8/">CentOS 8 配置 tensorflow GPU</a>
     </h2>
@@ -103,42 +104,88 @@
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;572 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF">技术</a>&nbsp;</span>
 
     </div>
-    <div class="post-item post-summary markdown-body">
-        记录一下给腾讯云 GPU 服务器安装 tensorflow-gpu 的过程。这玩意事挺多。 检查必要的东西 检查 Python 版本： $ python3 腾讯云自带了 Python3.6。如果没有就装一下。 验证系统是否有支持 CUDA 的 GPU： $ lspci | grep -i nvidia 确认系统已经安装了 gcc：
+    
+    <div class="post-content markdown-body">
+        <p>记录一下给腾讯云 GPU 服务器安装 tensorflow-gpu 的过程。这玩意事挺多。</p>
+<h2 id="检查必要的东西">检查必要的东西</h2>
+<p>检查 Python 版本：</p>
+<pre><code class="language-shell">$ python3
+</code></pre>
+<p>腾讯云自带了 Python3.6。如果没有就装一下。</p>
+<p>验证系统是否有支持 CUDA 的 GPU：</p>
+<pre><code class="language-shell">$ lspci | grep -i nvidia
+</code></pre>
+<p>确认系统已经安装了 gcc：</p>
+<pre><code class="language-shell">$ gcc --version
+</code></pre>
+<h2 id="安装-cuda">安装 CUDA</h2>
+<h3 id="1-下载">1. 下载</h3>
+<p>下载 NVIDIA CUDA 工具包，在这找下载链接：</p>
+<p><a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></p>
+<p>我们装 CUDA Toolkit 11.2 Update 2，target_type 选 runfilelocal 即可。</p>
+<h3 id="2-安装">2. 安装</h3>
+<p><strong>首先禁用 Nouveau 驱动</strong></p>
+<pre><code class="language-shell">$ vim /etc/modprobe.d/blacklist-nouveau.conf
+</code></pre>
+<p>如果已有内容就在最后添加，如果是空文件直接输入：</p>
+<pre><code>blacklist nouveau
+options nouveau modeset=0
+</code></pre>
+<p>然后执行</p>
+<pre><code class="language-shell">$ dracut --force
+</code></pre>
+<p>安装很简单：</p>
+<pre><code class="language-shell">$ sh cuda_&lt;version&gt;_linux.run
+</code></pre>
+<p>输入 accept，之后就一直按 install 与 yes 就行了。<strong>执行安装程序会安装自动安装与 CUDA 对应的驱动，所以请不要单独安装驱动</strong>。</p>
+<h3 id="3-设置环境变量">3. 设置环境变量</h3>
+<pre><code class="language-shell">$ vim /etc/profile
+</code></pre>
+<p>文件末尾添加：</p>
+<pre><code>export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export PATH=/usr/local/cuda-11.2/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64:$LD_LIBRARY_PATH
+</code></pre>
+<p>执行</p>
+<pre><code class="language-shell">$ source /etc/profile
+</code></pre>
+<h3 id="4-测试">4. 测试</h3>
+<pre><code class="language-shell">$ nvcc -V
+$ nvidia-smi
+</code></pre>
+<p>都能看到输出说明大成功，否则完犊子。</p>
+<h2 id="安装-cudnn">安装 cudnn</h2>
+<p><a href="https://developer.nvidia.com/rdp/cudnn-archive">https://developer.nvidia.com/rdp/cudnn-archive</a></p>
+<p>要先注册 nvidia 账号，哈哈。</p>
+<p>然后干就完了：</p>
+<pre><code class="language-shell">$ mv cudnn-&lt;version&gt;.solitairetheme8 cudnn-&lt;version&gt;.tgz
+$ tar -xzvf cudnn-&lt;version&gt;.tgz 
+$ cp cuda/include/cudnn*.h /usr/local/cuda/include
+$ cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+$ chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+</code></pre>
+<h2 id="安装-tensorflow-gpu">安装 tensorflow-gpu</h2>
+<pre><code class="language-shell">$ pip3 install tensorflow-gpu
+</code></pre>
+<p>然后菜了，报错 <code>python setup.py egg_info failed with error code 1</code>。需要先更新一波 pip：</p>
+<pre><code class="language-shell">$ pip3 install --upgrade setuptools
+$ python3 -m pip install --upgrade pip
+</code></pre>
+<p>装完了进入 Python，测试一波：</p>
+<pre><code class="language-shell">&gt;&gt;&gt; import tensorflow as tf
+&gt;&gt;&gt; tf.test.is_gpu_available()
+</code></pre>
+<p>又菜了，他说找不到 <code>libcusolver.so.10</code>。我看了一下，<code>/usr/local/cuda-11.1/lib64/</code> 里面有个 <code>libcusolver.so.11</code>，好家伙，这不是有病嘛，都 11.2 了还在找 .10，封建遗毒啊！来一个骚操作骗他一手：</p>
+<pre><code class="language-shell">$ ln -s /usr/local/cuda-11.2/lib64/libcusolver.so.11 /usr/local/cuda-11.2/lib64/libcusolver.so.10
+</code></pre>
+<p>然后就好了。</p>
+<h2 id="参考文献">参考文献</h2>
+<p>[1] <a href="https://blog.csdn.net/qq_35540540/article/details/108767800">https://blog.csdn.net/qq_35540540/article/details/108767800</a></p>
+<p>[2] <a href="https://github.com/tensorflow/tensorflow/issues/43947#issuecomment-739617116">https://github.com/tensorflow/tensorflow/issues/43947#issuecomment-739617116</a></p>
+
     </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://blog.shadiao.online/post/daily_poem/">每日怪诗——大年初二，像个傻蛋儿</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-02-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;234 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E6%B2%99%E9%9B%95">沙雕</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        （持续更新中） 序 小孩儿小孩儿你别馋， 过了腊八就是年； 腊八粥，喝几天， 哩哩啦啦二十三； 二十三，糖瓜粘； 二十四，扫房子； 二十五，冻豆腐； 二十六，炖猪肉； 二十七，宰公鸡； 二十八，把面发； 二十九，蒸馒头； 三十
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://blog.shadiao.online/post/python/">Python 速查表</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-02-22</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2245 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF">技术</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        <p>我们经常会用到 Python 的各种库，坠痛苦的就是有一些实用的命令记不住，用的时候只好现查，而且这个效率 efficiency…… 所以啊，我整了这么个速查表，以后直接在这里找就好了。</p>
-    </div>
-</div>
-
-
-
-
-
-
+</article>
 
 
 
@@ -194,9 +241,23 @@
             
         </div>
     </div>
-    
-    
-    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#检查必要的东西">检查必要的东西</a></li>
+    <li><a href="#安装-cuda">安装 CUDA</a>
+      <ul>
+        <li><a href="#1-下载">1. 下载</a></li>
+        <li><a href="#2-安装">2. 安装</a></li>
+        <li><a href="#3-设置环境变量">3. 设置环境变量</a></li>
+        <li><a href="#4-测试">4. 测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装-cudnn">安装 cudnn</a></li>
+    <li><a href="#安装-tensorflow-gpu">安装 tensorflow-gpu</a></li>
+    <li><a href="#参考文献">参考文献</a></li>
+  </ul>
+</nav></div>
 </aside>
         </div>
         <div class="btn">
@@ -260,6 +321,28 @@
             </span>
             
         </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#检查必要的东西">检查必要的东西</a></li>
+    <li><a href="#安装-cuda">安装 CUDA</a>
+      <ul>
+        <li><a href="#1-下载">1. 下载</a></li>
+        <li><a href="#2-安装">2. 安装</a></li>
+        <li><a href="#3-设置环境变量">3. 设置环境变量</a></li>
+        <li><a href="#4-测试">4. 测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装-cudnn">安装 cudnn</a></li>
+    <li><a href="#安装-tensorflow-gpu">安装 tensorflow-gpu</a></li>
+    <li><a href="#参考文献">参考文献</a></li>
+  </ul>
+</nav>
     </div>
     
     

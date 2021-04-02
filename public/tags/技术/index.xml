@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 沙雕园</title>
-    <link>https://blog.shadiao.online/post/</link>
-    <description>Recent content in Posts on 沙雕园</description>
+    <title>技术 on 沙雕园</title>
+    <link>https://blog.shadiao.online/tags/%E6%8A%80%E6%9C%AF/</link>
+    <description>Recent content in 技术 on 沙雕园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
-    <lastBuildDate>Fri, 02 Apr 2021 00:00:26 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Apr 2021 00:00:26 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/tags/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CentOS 8 配置 tensorflow GPU</title>
       <link>https://blog.shadiao.online/post/centos8/</link>
@@ -14,15 +14,6 @@
       
       <guid>https://blog.shadiao.online/post/centos8/</guid>
       <description>记录一下给腾讯云 GPU 服务器安装 tensorflow-gpu 的过程。这玩意事挺多。 检查必要的东西 检查 Python 版本： $ python3 腾讯云自带了 Python3.6。如果没有就装一下。 验证系统是否有支持 CUDA 的 GPU： $ lspci | grep -i nvidia 确认系统已经安装了 gcc：</description>
-    </item>
-    
-    <item>
-      <title>每日怪诗——大年初二，像个傻蛋儿</title>
-      <link>https://blog.shadiao.online/post/daily_poem/</link>
-      <pubDate>Wed, 24 Feb 2021 00:00:26 +0800</pubDate>
-      
-      <guid>https://blog.shadiao.online/post/daily_poem/</guid>
-      <description>（持续更新中） 序 小孩儿小孩儿你别馋， 过了腊八就是年； 腊八粥，喝几天， 哩哩啦啦二十三； 二十三，糖瓜粘； 二十四，扫房子； 二十五，冻豆腐； 二十六，炖猪肉； 二十七，宰公鸡； 二十八，把面发； 二十九，蒸馒头； 三十</description>
     </item>
     
     <item>

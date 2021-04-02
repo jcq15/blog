@@ -6,7 +6,16 @@
     <description>Recent content on 沙雕园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
-    <lastBuildDate>Wed, 24 Feb 2021 00:00:26 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Apr 2021 00:00:26 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS 8 配置 tensorflow GPU</title>
+      <link>https://blog.shadiao.online/post/centos8/</link>
+      <pubDate>Fri, 02 Apr 2021 00:00:26 +0800</pubDate>
+      
+      <guid>https://blog.shadiao.online/post/centos8/</guid>
+      <description>记录一下给腾讯云 GPU 服务器安装 tensorflow-gpu 的过程。这玩意事挺多。 检查必要的东西 检查 Python 版本： $ python3 腾讯云自带了 Python3.6。如果没有就装一下。 验证系统是否有支持 CUDA 的 GPU： $ lspci | grep -i nvidia 确认系统已经安装了 gcc：</description>
+    </item>
+    
     <item>
       <title>每日怪诗——大年初二，像个傻蛋儿</title>
       <link>https://blog.shadiao.online/post/daily_poem/</link>
