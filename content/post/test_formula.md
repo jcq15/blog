@@ -1,7 +1,7 @@
 ---
 title: "公式测试"
 date: 2021-04-29T20:13:04+08:00
-draft: false
+draft: true
 tags: ["测试"]
 math: true
 ---

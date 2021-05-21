@@ -6,7 +6,16 @@
     <description>Recent content on 沙雕园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
-    <lastBuildDate>Sun, 02 May 2021 20:13:04 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>日麻算分规则推导（附流程图）</title>
+      <link>https://blog.shadiao.online/post/mahjong/</link>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://blog.shadiao.online/post/mahjong/</guid>
+      <description>&lt;p&gt;对于刚入坑的玩家来说，日麻的算分规则极其复杂，记住役种已经很困难了，还要算番算符。要是遇到面麻四个人都不会算分，就会被水淹没不知所措。如果因为算分起了争执，可能打起来，被打死，十分危险。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>演员大型教程——怎么演气人还不被举报？</title>
       <link>https://blog.shadiao.online/post/act_wzry/</link>
@@ -14,25 +23,6 @@
       
       <guid>https://blog.shadiao.online/post/act_wzry/</guid>
       <description>鲁迅曾经说过，好的心态是成功的一半。在准备演之前，一定要调整好心态： 告诉自己：从现在开始我就是一个演员！以后将狠下心来演，坚决不好好打！ 这种心理建设十分重要，很多初心者往往不习惯坑人，或者遇到顺风局就</description>
-    </item>
-    
-    <item>
-      <title>《时间简史》读书笔记</title>
-      <link>https://blog.shadiao.online/post/shijianjianshi/</link>
-      <pubDate>Thu, 29 Apr 2021 20:13:04 +0800</pubDate>
-      
-      <guid>https://blog.shadiao.online/post/shijianjianshi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>公式测试</title>
-      <link>https://blog.shadiao.online/post/test_formula/</link>
-      <pubDate>Thu, 29 Apr 2021 20:13:04 +0800</pubDate>
-      
-      <guid>https://blog.shadiao.online/post/test_formula/</guid>
-      <description>&lt;p&gt;测试一下数学公式功能，后面要写坎巴拉太空计划的一些理论教程。&lt;/p&gt;
-&lt;p&gt;参考：https://note.qidong.name/2018/03/hugo-mathjax/&lt;/p&gt;</description>
     </item>
     
     <item>
