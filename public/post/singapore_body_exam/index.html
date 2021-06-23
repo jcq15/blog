@@ -22,7 +22,7 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>CentOS 8 配置 tensorflow GPU - 沙雕园</title>
+<title>新加坡签证/NUS入学体检经验分享 - 沙雕园</title>
 
 
 <meta name="author" content="精神病人" />
@@ -31,16 +31,16 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
-<meta name="keywords" content="技术" />
+<meta name="keywords" content="新加坡, NUS, 经验分享" />
 
 
-<meta property="og:title" content="CentOS 8 配置 tensorflow GPU" />
-<meta name="twitter:title" content="CentOS 8 配置 tensorflow GPU" />
+<meta property="og:title" content="新加坡签证/NUS入学体检经验分享" />
+<meta name="twitter:title" content="新加坡签证/NUS入学体检经验分享" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.shadiao.online/post/centos8/" /><meta property="og:description" content="记录一下给腾讯云 GPU 服务器安装 tensorflow-gpu 的过程。这玩意事挺多。 检查必要的东西 检查 Python 版本： $ python3 腾讯云自带了 Python3.6。如果没有就装一下。 验证系统是否有支持 CUDA 的 GPU： $ lspci | grep -i nvidia 确认系统已经安装了 gcc：" />
-<meta name="twitter:description" content="记录一下给腾讯云 GPU 服务器安装 tensorflow-gpu 的过程。这玩意事挺多。 检查必要的东西 检查 Python 版本： $ python3 腾讯云自带了 Python3.6。如果没有就装一下。 验证系统是否有支持 CUDA 的 GPU： $ lspci | grep -i nvidia 确认系统已经安装了 gcc：" /><meta property="og:image" content="https://blog.shadiao.online/img/og.png" />
+<meta property="og:url" content="https://blog.shadiao.online/post/singapore_body_exam/" /><meta property="og:description" content="以下内容均为个人经验，没有统计意义，并且记忆可能有误，所以可能会出现偏差。仅供参考。 体检前的准备 为啥体检 申请签证和NUS入学都要求体检。抵达新加坡后再体检，但根据多方消息，开学后NUS的校医院人巨多，" />
+<meta name="twitter:description" content="以下内容均为个人经验，没有统计意义，并且记忆可能有误，所以可能会出现偏差。仅供参考。 体检前的准备 为啥体检 申请签证和NUS入学都要求体检。抵达新加坡后再体检，但根据多方消息，开学后NUS的校医院人巨多，" /><meta property="og:image" content="https://blog.shadiao.online/img/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://blog.shadiao.online/img/og.png" /><meta property="article:published_time" content="2021-04-02T00:00:26+08:00" /><meta property="article:modified_time" content="2021-04-02T00:00:26+08:00" />
+<meta name="twitter:image" content="https://blog.shadiao.online/img/og.png" /><meta property="article:published_time" content="2021-06-23T14:00:00+08:00" /><meta property="article:modified_time" content="2021-06-23T14:00:00+08:00" />
 
 
 <style>
@@ -98,91 +98,91 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://blog.shadiao.online/post/centos8/">CentOS 8 配置 tensorflow GPU</a>
+        <a href="https://blog.shadiao.online/post/singapore_body_exam/">新加坡签证/NUS入学体检经验分享</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;572 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF">技术</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-06-23</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1477 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E6%96%B0%E5%8A%A0%E5%9D%A1">新加坡</a>&nbsp;<a href="/tags/nus">NUS</a>&nbsp;<a href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB">经验分享</a>&nbsp;</span>
 
     </div>
     
     <div class="post-content markdown-body">
-        <p>记录一下给腾讯云 GPU 服务器安装 tensorflow-gpu 的过程。这玩意事挺多。</p>
-<h2 id="检查必要的东西">检查必要的东西</h2>
-<p>检查 Python 版本：</p>
-<pre><code class="language-shell">$ python3
-</code></pre>
-<p>腾讯云自带了 Python3.6。如果没有就装一下。</p>
-<p>验证系统是否有支持 CUDA 的 GPU：</p>
-<pre><code class="language-shell">$ lspci | grep -i nvidia
-</code></pre>
-<p>确认系统已经安装了 gcc：</p>
-<pre><code class="language-shell">$ gcc --version
-</code></pre>
-<h2 id="安装-cuda">安装 CUDA</h2>
-<h3 id="1-下载">1. 下载</h3>
-<p>下载 NVIDIA CUDA 工具包，在这找下载链接：</p>
-<p><a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></p>
-<p>我们装 CUDA Toolkit 11.2 Update 2，target_type 选 runfilelocal 即可。</p>
-<h3 id="2-安装">2. 安装</h3>
-<p><strong>首先禁用 Nouveau 驱动</strong></p>
-<pre><code class="language-shell">$ vim /etc/modprobe.d/blacklist-nouveau.conf
-</code></pre>
-<p>如果已有内容就在最后添加，如果是空文件直接输入：</p>
-<pre><code>blacklist nouveau
-options nouveau modeset=0
-</code></pre>
-<p>然后执行</p>
-<pre><code class="language-shell">$ dracut --force
-</code></pre>
-<p>安装很简单：</p>
-<pre><code class="language-shell">$ sh cuda_&lt;version&gt;_linux.run
-</code></pre>
-<p>输入 accept，之后就一直按 install 与 yes 就行了。<strong>执行安装程序会安装自动安装与 CUDA 对应的驱动，所以请不要单独安装驱动</strong>。</p>
-<h3 id="3-设置环境变量">3. 设置环境变量</h3>
-<pre><code class="language-shell">$ vim /etc/profile
-</code></pre>
-<p>文件末尾添加：</p>
-<pre><code>export PATH=/usr/local/cuda/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-export PATH=/usr/local/cuda-11.2/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64:$LD_LIBRARY_PATH
-</code></pre>
-<p>执行</p>
-<pre><code class="language-shell">$ source /etc/profile
-</code></pre>
-<h3 id="4-测试">4. 测试</h3>
-<pre><code class="language-shell">$ nvcc -V
-$ nvidia-smi
-</code></pre>
-<p>都能看到输出说明大成功，否则完犊子。</p>
-<h2 id="安装-cudnn">安装 cudnn</h2>
-<p><a href="https://developer.nvidia.com/rdp/cudnn-archive">https://developer.nvidia.com/rdp/cudnn-archive</a></p>
-<p>要先注册 nvidia 账号，哈哈。</p>
-<p>然后干就完了：</p>
-<pre><code class="language-shell">$ mv cudnn-&lt;version&gt;.solitairetheme8 cudnn-&lt;version&gt;.tgz
-$ tar -xzvf cudnn-&lt;version&gt;.tgz 
-$ cp cuda/include/cudnn*.h /usr/local/cuda/include
-$ cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
-$ chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-</code></pre>
-<h2 id="安装-tensorflow-gpu">安装 tensorflow-gpu</h2>
-<pre><code class="language-shell">$ pip3 install tensorflow-gpu
-</code></pre>
-<p>然后菜了，报错 <code>python setup.py egg_info failed with error code 1</code>。需要先更新一波 pip：</p>
-<pre><code class="language-shell">$ pip3 install --upgrade setuptools
-$ python3 -m pip install --upgrade pip
-</code></pre>
-<p>装完了进入 Python，测试一波：</p>
-<pre><code class="language-shell">&gt;&gt;&gt; import tensorflow as tf
-&gt;&gt;&gt; tf.test.is_gpu_available()
-</code></pre>
-<p>又菜了，他说找不到 <code>libcusolver.so.10</code>。我看了一下，<code>/usr/local/cuda-11.1/lib64/</code> 里面有个 <code>libcusolver.so.11</code>，好家伙，这不是有病嘛，都 11.2 了还在找 .10，封建遗毒啊！来一个骚操作骗他一手：</p>
-<pre><code class="language-shell">$ ln -s /usr/local/cuda-11.2/lib64/libcusolver.so.11 /usr/local/cuda-11.2/lib64/libcusolver.so.10
-</code></pre>
-<p>然后就好了。</p>
-<h2 id="参考文献">参考文献</h2>
-<p>[1] <a href="https://blog.csdn.net/qq_35540540/article/details/108767800">https://blog.csdn.net/qq_35540540/article/details/108767800</a></p>
-<p>[2] <a href="https://github.com/tensorflow/tensorflow/issues/43947#issuecomment-739617116">https://github.com/tensorflow/tensorflow/issues/43947#issuecomment-739617116</a></p>
+        <p>以下内容均为个人经验，没有统计意义，并且记忆可能有误，所以可能会出现偏差。仅供参考。</p>
+<!-- more -->
+<h1 id="体检前的准备">体检前的准备</h1>
+<h2 id="为啥体检">为啥体检</h2>
+<p>申请签证和NUS入学都要求体检。抵达新加坡后再体检，但根据多方消息，开学后NUS的校医院人巨多，为了节省时间，还是建议大家在国内体检。学校发的 Handbook 上也是这么说的：</p>
+<blockquote>
+<p>The medical examination can be done at the University Health Centre (UHC) or as in the case of International students, in the student’s home country.</p>
+</blockquote>
+<blockquote>
+<p>In the interest of time, you are encouraged to do your medical exams in your home country.</p>
+</blockquote>
+<h2 id="预约">预约</h2>
+<p>预约方式：</p>
+<ul>
+<li>网站：https://yuyue.beijingithc.org.cn （最近网站维护，该通道不可用）</li>
+<li>公众号：海关总署国际旅行卫生保健中心</li>
+</ul>
+<p>体检地点是<strong>国际旅行卫生保健中心</strong>。北京的地点叫“海关总署（北京）国际旅行卫生保健中心”，地址为<strong>北京市东城区和平里北街20号</strong>。</p>
+<blockquote>
+<p>注：有些攻略里（包括 Google Map）显示地址在马甸东路，那是过时的信息！2021年出境体检已经搬到了和平里！</p>
+</blockquote>
+<p>体检需要提前预约，人挺多的，尽量早约。我 6 月初预约的，已经排到了 6 月 23 日。</p>
+<p>体检表需要 FIN 码，所以要保证体检当日 IPA 已申请完成。</p>
+<h2 id="体检前一天">体检前一天</h2>
+<p>体检需要抽血并检查腹部超声，所以需要<strong>空腹</strong>。前一晚 10 点之后不要吃东西，仅少量饮水。次日起床后不可大量饮水。</p>
+<p>通过收集各方消息，我准备了以下材料：</p>
+<ul>
+<li>护照原件</li>
+<li>身份证原件</li>
+<li>2 张 2 寸白底照片</li>
+<li>IPA Letter</li>
+<li>学校 offer</li>
+<li>Medical Examination Report （IPA 申请完成后，在申请网站下载）</li>
+<li>NUS 的体检表</li>
+</ul>
+<p><strong>实际用到的材料</strong>是：</p>
+<ul>
+<li>护照原件</li>
+<li>身份证原件</li>
+<li>2 张 2 寸白底照片</li>
+<li>Medical Examination Report （IPA 申请完成后，在申请网站下载）</li>
+<li>NUS 的体检表</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>两份体检表都要事先填好个人信息（Medical Examination Report 的 Personal Particulars 项和 NUS 体检表的第一页）</li>
+<li>要准备 2 张 2 寸白底照片，格式不合格会被批判一番，还要交 60 元现场搞照片</li>
+</ul>
+<h1 id="体检当日">体检当日</h1>
+<h2 id="起床出发">起床出发</h2>
+<p>起床后不要吃饭，仅可少量饮水。<strong>有尿检，所以建议别撒尿，不然到时候就得使劲挤。</strong></p>
+<p>穿着上下分开方便穿脱的服装，不要穿连衣裙或者胶衣或者什么奇怪的东西（？）。做心电图和 B 超需要掀起上衣，测身高体重需要脱鞋。X 光检查内衣里不能有金属物品。</p>
+<h2 id="到达现场">到达现场</h2>
+<p>现场有门神，需要健康码和行程码。</p>
+<p>进去之后有个二门神，问你去哪干啥的，然后给你个纸片，调查有没有接触过新冠患者之类的，然后放行。</p>
+<h2 id="取号交费">取号交费</h2>
+<p>下一步是取号。</p>
+<p>官方规定的取号时间是 7：00 - 10：30，10：30 之后就不能取号了。我 9：20 到的，取号的号码是 135，前面有 44 位。他们 8：00 开始工作，以此推测 80 分钟 处理了 90 人，大概每个人 0.89 分钟。实际情况是，我 10：10 排到了，跟估计的接近。</p>
+<p>有几处排队。取号之后等待时间最长，然后是抽血等了几分钟，最后交表的队伍也挺慢。其他项目基本不排队。全流程结束已经 12 点多。</p>
+<p>排到你之后，会给你一个体检表，上面列了体检项目，签字即可。注意新加坡是先体检后取得签证，所以<strong>不能申请兔费体检</strong>。<strong>体检费用是 646.70 元</strong>，支持现金/微信/支付婊。</p>
+<h2 id="检查">检查</h2>
+<p>交费之后上三楼，墙上有扫码的地方，扫体检表左上角的条码，会告诉你下一步去哪。按照流程逐项检查即可。</p>
+<p>值得注意的是，尿检那个 NPC 会随机抢人。你在旁边做别的项目，如果被她抓住了，她会叫你先去尿检。如果有强迫症不想打乱流程，需要走位躲避。</p>
+<p>具体项目是：</p>
+<ul>
+<li>心电图</li>
+<li>全科检查（身高体重血压视力听诊）</li>
+<li>腹部 B 超</li>
+<li>抽几坨血</li>
+<li>尿检</li>
+<li>胸部 X 光</li>
+</ul>
+<h2 id="交表">交表</h2>
+<p>一楼大厅最长的那个队就是。体检完了拿着体检表和两份要医生填的英文表格去。在这里需要 2 张 2 寸白底照片。这个 NPC 比较坑，我带了蓝底的，被要求重新弄，发了个电子版的给他，付费 60 之后他给我整了 8 张 白底的。最好提前准备好。</p>
+<p>之后填个地址单，结果会寄给你。根据官方说法，4 个工作日出报告，1 个工作日邮寄。</p>
+<p>新加坡的体检，体检表上会自动写明需要 X 光报告和 HIV 报告，所以这部分不用担心。</p>
+<p>然后跑路就行了。</p>
 
     </div>
 </article>
@@ -264,18 +264,17 @@ $ python3 -m pip install --upgrade pip
     <div class="sidebar-item sidebar-toc">
         <h3>目录</h3><nav id="TableOfContents">
   <ul>
-    <li><a href="#检查必要的东西">检查必要的东西</a></li>
-    <li><a href="#安装-cuda">安装 CUDA</a>
-      <ul>
-        <li><a href="#1-下载">1. 下载</a></li>
-        <li><a href="#2-安装">2. 安装</a></li>
-        <li><a href="#3-设置环境变量">3. 设置环境变量</a></li>
-        <li><a href="#4-测试">4. 测试</a></li>
-      </ul>
-    </li>
-    <li><a href="#安装-cudnn">安装 cudnn</a></li>
-    <li><a href="#安装-tensorflow-gpu">安装 tensorflow-gpu</a></li>
-    <li><a href="#参考文献">参考文献</a></li>
+    <li><a href="#为啥体检">为啥体检</a></li>
+    <li><a href="#预约">预约</a></li>
+    <li><a href="#体检前一天">体检前一天</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#起床出发">起床出发</a></li>
+    <li><a href="#到达现场">到达现场</a></li>
+    <li><a href="#取号交费">取号交费</a></li>
+    <li><a href="#检查">检查</a></li>
+    <li><a href="#交表">交表</a></li>
   </ul>
 </nav></div>
 </aside>
@@ -369,18 +368,17 @@ $ python3 -m pip install --upgrade pip
         <h3>目录</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#检查必要的东西">检查必要的东西</a></li>
-    <li><a href="#安装-cuda">安装 CUDA</a>
-      <ul>
-        <li><a href="#1-下载">1. 下载</a></li>
-        <li><a href="#2-安装">2. 安装</a></li>
-        <li><a href="#3-设置环境变量">3. 设置环境变量</a></li>
-        <li><a href="#4-测试">4. 测试</a></li>
-      </ul>
-    </li>
-    <li><a href="#安装-cudnn">安装 cudnn</a></li>
-    <li><a href="#安装-tensorflow-gpu">安装 tensorflow-gpu</a></li>
-    <li><a href="#参考文献">参考文献</a></li>
+    <li><a href="#为啥体检">为啥体检</a></li>
+    <li><a href="#预约">预约</a></li>
+    <li><a href="#体检前一天">体检前一天</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#起床出发">起床出发</a></li>
+    <li><a href="#到达现场">到达现场</a></li>
+    <li><a href="#取号交费">取号交费</a></li>
+    <li><a href="#检查">检查</a></li>
+    <li><a href="#交表">交表</a></li>
   </ul>
 </nav>
     </div>
