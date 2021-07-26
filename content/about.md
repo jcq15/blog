@@ -9,4 +9,4 @@ showToc = false
 
 分享一些奇奇怪怪的东西。
 
-
+联系作者：[mail.shazi@foxmail.com](mailto:mail.shazi@foxmail.com)
