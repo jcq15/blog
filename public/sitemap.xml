@@ -2,19 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.shadiao.online/tags/nus/</loc>
-    <lastmod>2021-06-23T14:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://blog.shadiao.online/post/</loc>
+    <lastmod>2021-07-26T17:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.shadiao.online/post/luojimiuwu/</loc>
+    <lastmod>2021-07-26T17:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.shadiao.online/</loc>
+    <lastmod>2021-07-26T17:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.shadiao.online/tags/%E7%A7%91%E5%AD%A6%E7%B4%A0%E5%85%BB/</loc>
+    <lastmod>2021-07-26T17:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.shadiao.online/tags/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2021-07-23T10:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.shadiao.online/post/website/</loc>
+    <lastmod>2021-07-23T10:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.shadiao.online/tags/nus/</loc>
     <lastmod>2021-06-23T14:00:00+08:00</lastmod>
   </url><url>
     <loc>https://blog.shadiao.online/tags/%E6%96%B0%E5%8A%A0%E5%9D%A1/</loc>
     <lastmod>2021-06-23T14:00:00+08:00</lastmod>
   </url><url>
     <loc>https://blog.shadiao.online/post/singapore_body_exam/</loc>
-    <lastmod>2021-06-23T14:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.shadiao.online/</loc>
     <lastmod>2021-06-23T14:00:00+08:00</lastmod>
   </url><url>
     <loc>https://blog.shadiao.online/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/</loc>
@@ -33,9 +45,6 @@
     <lastmod>2021-05-02T20:13:04+08:00</lastmod>
   </url><url>
     <loc>https://blog.shadiao.online/post/centos8/</loc>
-    <lastmod>2021-04-02T00:00:26+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.shadiao.online/tags/%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2021-04-02T00:00:26+08:00</lastmod>
   </url><url>
     <loc>https://blog.shadiao.online/post/daily_poem/</loc>
