@@ -6,7 +6,16 @@
     <description>Recent content in 学习 on 沙雕园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
-    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/tags/%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Aug 2021 14:13:04 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/tags/%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>线性回归快速开始</title>
+      <link>https://blog.shadiao.online/post/linearregression/</link>
+      <pubDate>Sun, 15 Aug 2021 14:13:04 +0800</pubDate>
+      
+      <guid>https://blog.shadiao.online/post/linearregression/</guid>
+      <description>&lt;p&gt;先简单讲讲 MLE。之后会补充方差分析，以及从 GLE 的角度把线性回归和方差分析统一起来。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>日麻算分规则推导（附流程图）</title>
       <link>https://blog.shadiao.online/post/mahjong/</link>
