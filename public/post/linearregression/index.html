@@ -63,29 +63,6 @@
 
 
 
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [["$", "$"]],
-    },
-    displayMath: [
-      ["$$", "$$"],
-      ["\[\[", "\]\]"],
-    ],
-    svg: {
-      fontCache: "global",
-    },
-  };
-</script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-></script>
-
 </head>
 
 <body data-theme="auto">
@@ -284,6 +261,18 @@ $\hat{\mathbf{Y}}-\bar{\mathbf{Y}}=\left(\mathbf{X}(\mathbf{X}^{\mathrm T}\mathb
 
 
 
+<div class="post-comment" data-comment="utterances">
+    
+    
+    <script src="https://utteranc.es/client.js"
+        repo="jcq15/blog"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+</div>
+
 
             </div>
             <aside class="col-12 col-md-3 float-left sidebar">
@@ -305,7 +294,7 @@ $\hat{\mathbf{Y}}-\bar{\mathbf{Y}}=\left(\mathbf{X}(\mathbf{X}^{\mathrm T}\mathb
             </li>
             
             <li>
-                <a href="/search/">搜索</a>
+                <a href="/index.xml">RSS</a>
             </li>
             
         </ul>
@@ -421,7 +410,7 @@ $\hat{\mathbf{Y}}-\bar{\mathbf{Y}}=\left(\mathbf{X}(\mathbf{X}^{\mathrm T}\mathb
             </li>
             
             <li>
-                <a href="/search/">搜索</a>
+                <a href="/index.xml">RSS</a>
             </li>
             
         </ul>
@@ -544,12 +533,26 @@ $\hat{\mathbf{Y}}-\bar{\mathbf{Y}}=\left(\mathbf{X}(\mathbf{X}^{\mathrm T}\mathb
 
 <script defer src="/assets/js/fuji.min.js"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script
-  defer
-  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-  onload="renderMathInElement(document.body);"
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 ></script>
 
 

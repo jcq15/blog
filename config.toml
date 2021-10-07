@@ -77,8 +77,8 @@ paginate = 10
 
   # Comments
   # utterances, see: https://utteranc.es/
-  # utterancesRepo = "*/*"
-  # utterancesIssueTerm = "pathname"
+  utterancesRepo = "jcq15/blog"
+  utterancesIssueTerm = "title"
 
   # Disqus, see: https://disqus.com/admin/install/platforms/universalcode/
   # disqusShortname = "*********"
@@ -130,9 +130,9 @@ paginate = 10
     url = "/search/"
     weight = 4
   #[[menu.nav]]
-  #  name = "RSS"
-  #  url = "/index.xml"
-  #  weight = 5
+    name = "RSS"
+    url = "/index.xml"
+    weight = 5
 
   [[menu.link]]
     name = "GitHub"
