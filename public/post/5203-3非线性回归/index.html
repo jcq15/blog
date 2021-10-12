@@ -22,7 +22,7 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>学习 - 沙雕园</title>
+<title>线性回归（三）-非线性回归 - 沙雕园</title>
 
 
 <meta name="author" content="精神病人" />
@@ -31,13 +31,16 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
+<meta name="keywords" content="学习" />
 
-<meta property="og:title" content="学习" />
-<meta name="twitter:title" content="学习" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://blog.shadiao.online/tags/%E5%AD%A6%E4%B9%A0/" /><meta property="og:image" content="https://blog.shadiao.online/img/og.png" />
+
+<meta property="og:title" content="线性回归（三）-非线性回归" />
+<meta name="twitter:title" content="线性回归（三）-非线性回归" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.shadiao.online/post/5203-3%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" /><meta property="og:description" content="很多时候，线性模型并不能满足我们的需求，这时候考虑非线性模型是一个不错的选择。但习说不是胡说，改变不是瞎编，我们还是要利用之前学过的线性模型的。" />
+<meta name="twitter:description" content="很多时候，线性模型并不能满足我们的需求，这时候考虑非线性模型是一个不错的选择。但习说不是胡说，改变不是瞎编，我们还是要利用之前学过的线性模型的。" /><meta property="og:image" content="https://blog.shadiao.online/img/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://blog.shadiao.online/img/og.png" /><meta property="og:updated_time" content="2021-10-12T00:00:00+00:00" />
+<meta name="twitter:image" content="https://blog.shadiao.online/img/og.png" /><meta property="article:published_time" content="2021-10-12T00:00:00+00:00" /><meta property="article:modified_time" content="2021-10-12T00:00:00+00:00" />
 
 
 <style>
@@ -92,14 +95,8 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-
-<div class="page-info">
-    <span>拥有标签 学习 的文章：</span>
-</div>
-
-
-
-<div class="post">
+<article>
+    
     <h2 class="post-item post-title">
         <a href="https://blog.shadiao.online/post/5203-3%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归（三）-非线性回归</a>
     </h2>
@@ -107,58 +104,112 @@
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-10-12</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1081 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0">学习</a>&nbsp;</span>
 
     </div>
-    <div class="post-item post-summary markdown-body">
+    
+    <div class="post-content markdown-body">
         <p>很多时候，线性模型并不能满足我们的需求，这时候考虑非线性模型是一个不错的选择。但习说不是胡说，改变不是瞎编，我们还是要利用之前学过的线性模型的。</p>
+<h2 id="多项式回归">多项式回归</h2>
+<h3 id="基本模型">基本模型</h3>
+<p>我们只看单变量的情况，这时候由它的不同次幂构成每一项：
+$$
+y=\beta_0+\beta_1x+\beta_2x^2+\cdots+\beta_mx^m+\varepsilon,
+$$
+其中 $\varepsilon\sim N(0,\sigma^2)$.</p>
+<p>求解老掉牙了，不说了。</p>
+<h3 id="问题">问题</h3>
+<p>我们需要关注它的两个缺点：</p>
+<ul>
+<li>可能有严重的多重共线性</li>
+<li>增删某一项之后，其他系数需要重新计算</li>
+</ul>
+<p>比如在 $x$ 比较小时，每一列都差不多是 $0$，多重共线性严重。至于第二个缺点，我们可以假设，现在有一个 $m$ 阶的模型，我们发现结果不显著，想引入 $m+1$ 次项。设原来的设计矩阵是 $X_m$，新的设计矩阵为 $X=\begin{pmatrix}X_m &amp;x^{m+1}\end{pmatrix}$. 则
+$$
+X^TX=
+\begin{pmatrix}
+X_m^TX_m &amp; X_m^Tx^{m+1}\\<br>
+(x^{m+1})^TX_m &amp; (x^{m+1})^Tx^{m+1}\\<br>
+\end{pmatrix}.
+$$
+这都纠缠到一起了，新的 $\beta_i$ 要重新计算。</p>
+<h3 id="正交多项式回归">正交多项式回归</h3>
+<p>为了解决这一问题，我们引入正交多项式回归。其基本思想是，用一个 $k$ 次多项式 $P_k(x)$ 代替 $x^k$。这时模型变为
+$$
+y=\beta_0P_0(x)+\beta_1P_1(x)+\cdots+\beta_mP_m(x)+\varepsilon.
+$$
+多项式正交，采用最直观的定义，即 $\sum_{i=1}^n P(x_i)Q(x_i)=0$ 则称 $P,Q$ 正交。</p>
+<p>如果模型中 $P_i,P_j$ 两两正交，计算
+$$
+X^TX=\begin{pmatrix}
+X_m^TX_m &amp; 0\\<br>
+0 &amp; P_{m+1}(x)^TP_{m+1}(x)\\<br>
+\end{pmatrix}.
+$$
+这样当我们在模型中增删项的时候，就不用重新计算系数了。</p>
+<h3 id="计算正交多项式">计算正交多项式</h3>
+<p>一般来说，要算正交多项式就得老老实实列方程算。由于多项式乘个常数没有任何影响，所以 $P_k(x)$ 有 $k$ 个参数。利用 $P_k$ 和 $P_0,\cdots,P_{k-1}$ 正交，就能解出来了。</p>
+<p>对于 $x$ 等间隔的情况，有如下的快速计算公式：</p>
+<p><img class="img-zoomable" src="5203%5c1.png" alt="image-20210906152000802" />
+</p>
+<p>其中 $d$ 是间距，$\lambda$ 可自由选择，不影响结果。通常选取 $\lambda$ 使得多项式中各个系数都是整数，好算。</p>
+<h3 id="参考文献">参考文献</h3>
+<ol>
+<li><a href="http://home.iitk.ac.in/~shalab/regression/Chapter12-Regression-PolynomialRegression.pdf" target="_blank">http://home.iitk.ac.in/~shalab/regression/Chapter12-Regression-PolynomialRegression.pdf</a></li>
+</ol>
+<h2 id="异方差---box-cox-变换">异方差 - BOX-COX 变换</h2>
+<p>我们之前的所有模型都假定误差同方差，但现实却经常遇到异方差的情况。这是一个很大的话题，我们这里只简单介绍一种处理方案——对 $y$ 进行 BOX-COX 变换。</p>
+<p>BOX-COX 变换有一个参数 $\lambda$，公式为</p>
+<p>$$
+z=f(y)=\left{\begin{align}
+&amp;\frac{y^\lambda -1}{\lambda},\ \lambda\ne 0,\\<br>
+&amp;\log y,\ \lambda=0.
+\end{align}\right.
+$$</p>
+<p>这样定义的好处是导数非常简洁：</p>
+<p>$$
+f'(y)=y^{\lambda-1}.
+$$</p>
+<h3 id="理论分析">理论分析</h3>
+<p>我们可以把线性模型表达为 $y=\mu+\varepsilon$，其中 $\mu$ 可以是 $\beta x$ 或者类似的东西，总之就是能被回归解释的部分，$\varepsilon$ 是误差。我们假设标准差是 $\mu$ 的指数函数，即 ${\rm Var}(y)=k\mu^{2\alpha}$. 做变换 $z=f(y)$，在 $\mu$ 处 Taylor 展开：
+$$
+z=f(y)\approx f(\mu)+ f'(\mu)(y-\mu).
+$$
+于是
+$$
+{\rm Var}(z)\approx {\rm Var}(f'(\mu)(y-\mu))=f'(\mu)^2 k\mu^{2\alpha}=k\mu^{2\lambda-2+2\alpha}.
+$$
+如果 $\lambda=1-\alpha$, 就有
+$$
+{\rm Var}(z)=k.
+$$
+是常数了。</p>
+<h3 id="选取-lambda---scaled-lambda-plot">选取 $\lambda$ - Scaled $\lambda$ Plot</h3>
+<p>一般我们都是从表里选 $\lambda$:</p>
+<p><img class="img-zoomable" src="5203/3.png" alt="" />
+</p>
+<p>把表里的挨个试一遍，每个模型都计算每个系数的 $t$ 值，然后以 $\lambda$ 为横坐标，$t$ 为纵坐标画线。选个合适的。如下图：</p>
+<p><img class="img-zoomable" src="5203/4.png" alt="" />
+</p>
+<p>选的原则是，模型简洁，$t$ 越大越好。这里我们选 $\lambda=0$。$\lambda=-1/2$ 虽然大，但是多了个 BC 交叉项，不简洁。</p>
+<h3 id="选取-lambda---empirical-estimation">选取 $\lambda$ - Empirical Estimation</h3>
+<p>一个我觉得挺无赖的方法。注意到 $\sigma_i=k\mu_i^{\alpha}$, 有 $\log \sigma_i=\log k +\alpha\log \mu_i$. 线性回归可以得到 $\mu_i$ 和 $\sigma_i$ 的估计，然后再做一次线性回归估计 $\alpha$.</p>
+<blockquote>
+<p>可是线性回归的假设是同方差，现在有异方差的情况下估计，不是套娃了吗？</p>
+</blockquote>
     </div>
+</article>
+
+
+
+<div class="post-comment" data-comment="utterances">
+    
+    
+    <script src="https://utteranc.es/client.js"
+        repo="jcq15/blog"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
 </div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://blog.shadiao.online/post/5203-2%E5%8D%95%E5%9B%A0%E7%B4%A0%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90/">线性回归（二）-单因素方差分析</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-10-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1751 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0">学习</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        <p>方差分析模型（ANOVA）可以看成是线性模型的一类，但它重点考虑的是离散自变量对连续因变量的影响。</p>
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://blog.shadiao.online/post/5203-1%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归（一）-多元线性回归</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-08-15</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3267 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0">学习</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        <p>这节的内容是整个回归分析的核心，后面几节看似是不同的模型，其实都可以转化成 MLE.</p>
-<p>这一系列的文章里面很多乱七八糟的矩阵公式，看不懂很正常，多动手就好了。按照文中的思路把每个公式都亲自推导一遍，就能写出来比这个更完善的教程。</p>
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://blog.shadiao.online/post/mahjong/">日麻算分规则推导（附流程图）</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-20</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4540 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E6%B8%B8%E6%88%8F">游戏</a>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0">学习</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        <p>对于刚入坑的玩家来说，日麻的算分规则极其复杂，记住役种已经很困难了，还要算番算符。要是遇到面麻四个人都不会算分，就会被水淹没不知所措。如果因为算分起了争执，可能打起来，被打死，十分危险。</p>
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
 
             </div>
@@ -236,9 +287,27 @@
             
         </div>
     </div>
-    
-    
-    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#多项式回归">多项式回归</a>
+      <ul>
+        <li><a href="#基本模型">基本模型</a></li>
+        <li><a href="#问题">问题</a></li>
+        <li><a href="#正交多项式回归">正交多项式回归</a></li>
+        <li><a href="#计算正交多项式">计算正交多项式</a></li>
+        <li><a href="#参考文献">参考文献</a></li>
+      </ul>
+    </li>
+    <li><a href="#异方差---box-cox-变换">异方差 - BOX-COX 变换</a>
+      <ul>
+        <li><a href="#理论分析">理论分析</a></li>
+        <li><a href="#选取-lambda---scaled-lambda-plot">选取 $\lambda$ - Scaled $\lambda$ Plot</a></li>
+        <li><a href="#选取-lambda---empirical-estimation">选取 $\lambda$ - Empirical Estimation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
 </aside>
         </div>
         <div class="btn">
@@ -329,6 +398,32 @@
     </div>
     
     
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#多项式回归">多项式回归</a>
+      <ul>
+        <li><a href="#基本模型">基本模型</a></li>
+        <li><a href="#问题">问题</a></li>
+        <li><a href="#正交多项式回归">正交多项式回归</a></li>
+        <li><a href="#计算正交多项式">计算正交多项式</a></li>
+        <li><a href="#参考文献">参考文献</a></li>
+      </ul>
+    </li>
+    <li><a href="#异方差---box-cox-变换">异方差 - BOX-COX 变换</a>
+      <ul>
+        <li><a href="#理论分析">理论分析</a></li>
+        <li><a href="#选取-lambda---scaled-lambda-plot">选取 $\lambda$ - Scaled $\lambda$ Plot</a></li>
+        <li><a href="#选取-lambda---empirical-estimation">选取 $\lambda$ - Empirical Estimation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+    
   </div>
 </aside>
     </main>
@@ -361,6 +456,29 @@
 
 
 <script defer src="/assets/js/fuji.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
 
 
 </body>

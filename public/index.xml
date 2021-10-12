@@ -6,7 +6,25 @@
     <description>Recent content on 沙雕园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
-    <lastBuildDate>Fri, 08 Oct 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.shadiao.online/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>线性回归（三）-非线性回归</title>
+      <link>https://blog.shadiao.online/post/5203-3%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+      <pubDate>Tue, 12 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.shadiao.online/post/5203-3%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
+      <description>&lt;p&gt;很多时候，线性模型并不能满足我们的需求，这时候考虑非线性模型是一个不错的选择。但习说不是胡说，改变不是瞎编，我们还是要利用之前学过的线性模型的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>线性回归（二）-单因素方差分析</title>
+      <link>https://blog.shadiao.online/post/5203-2%E5%8D%95%E5%9B%A0%E7%B4%A0%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 11 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.shadiao.online/post/5203-2%E5%8D%95%E5%9B%A0%E7%B4%A0%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;p&gt;方差分析模型（ANOVA）可以看成是线性模型的一类，但它重点考虑的是离散自变量对连续因变量的影响。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>更新！支持评论和RSS订阅了！</title>
       <link>https://blog.shadiao.online/post/comment_and_rss/</link>
@@ -28,12 +46,13 @@
     </item>
     
     <item>
-      <title>线性回归快速开始</title>
-      <link>https://blog.shadiao.online/post/linearregression/</link>
+      <title>线性回归（一）-多元线性回归</title>
+      <link>https://blog.shadiao.online/post/5203-1%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
       <pubDate>Sun, 15 Aug 2021 14:13:04 +0800</pubDate>
       
-      <guid>https://blog.shadiao.online/post/linearregression/</guid>
-      <description>&lt;p&gt;先简单讲讲 MLE。之后会补充方差分析，以及从 GLE 的角度把线性回归和方差分析统一起来。&lt;/p&gt;</description>
+      <guid>https://blog.shadiao.online/post/5203-1%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
+      <description>&lt;p&gt;这节的内容是整个回归分析的核心，后面几节看似是不同的模型，其实都可以转化成 MLE.&lt;/p&gt;
+&lt;p&gt;这一系列的文章里面很多乱七八糟的矩阵公式，看不懂很正常，多动手就好了。按照文中的思路把每个公式都亲自推导一遍，就能写出来比这个更完善的教程。&lt;/p&gt;</description>
     </item>
     
     <item>
