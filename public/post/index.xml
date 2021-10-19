@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 沙雕园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
-    <lastBuildDate>Tue, 12 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.shadiao.online/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Oct 2021 14:13:04 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>马尔可夫链知识点整理 (ST5221)</title>
+      <link>https://blog.shadiao.online/post/5221-1markov_chain/</link>
+      <pubDate>Mon, 18 Oct 2021 14:13:04 +0800</pubDate>
+      
+      <guid>https://blog.shadiao.online/post/5221-1markov_chain/</guid>
+      <description>&lt;p&gt;主要是按照讲义来的，课堂上讲得比较浅，所以这篇文章也不会讨论太深。如果发现错误欢迎指出~&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>线性回归（三）-非线性回归</title>
       <link>https://blog.shadiao.online/post/5203-3%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>

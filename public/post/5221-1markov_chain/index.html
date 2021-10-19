@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.88.1" />
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon-16x16.png" />
+<link rel="manifest" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/site.webmanifest" />
+<link rel="mask-icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/safari-pinned-tab.svg" color="#8aa2d3" />
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>马尔可夫链知识点整理 (ST5221) - 沙雕园</title>
+
+
+<meta name="author" content="精神病人" />
+
+
+<meta name="description" content="A minimal Hugo theme with nice theme color." />
+
+
+<meta name="keywords" content="学习" />
+
+
+<meta property="og:title" content="马尔可夫链知识点整理 (ST5221)" />
+<meta name="twitter:title" content="马尔可夫链知识点整理 (ST5221)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.shadiao.online/post/5221-1markov_chain/" /><meta property="og:description" content="主要是按照讲义来的，课堂上讲得比较浅，所以这篇文章也不会讨论太深。如果发现错误欢迎指出~" />
+<meta name="twitter:description" content="主要是按照讲义来的，课堂上讲得比较浅，所以这篇文章也不会讨论太深。如果发现错误欢迎指出~" /><meta property="og:image" content="https://blog.shadiao.online/img/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://blog.shadiao.online/img/og.png" /><meta property="article:published_time" content="2021-10-18T14:13:04+08:00" /><meta property="article:modified_time" content="2021-10-18T14:13:04+08:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://blog.shadiao.online/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://blog.shadiao.online">沙雕园</a>
+            
+            <span class="title-sub">博客。</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://blog.shadiao.online/post/5221-1markov_chain/">马尔可夫链知识点整理 (ST5221)</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-10-18</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3151 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0">学习</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <p>主要是按照讲义来的，课堂上讲得比较浅，所以这篇文章也不会讨论太深。如果发现错误欢迎指出~</p>
+<h2 id="基本概念">基本概念</h2>
+<p>随机过程（stochastic processes）本质是一个二元函数 $X(\omega,t)$，它既可以看成一族随机变量的集合，也可以看成一族样本函数的集合。</p>
+<p>例：扔三次傻子，样本空间是 ${1,2,3,4,5,6}^3$，$t$ 取值 $1,2,3$. 若是固定 $\omega=(2,5,1)$，则得到一个<strong>样本函数</strong> $X((2,5,1),t)$. 若是固定 $t=2$，则得到一个<strong>随机变量</strong> $X(\omega,2)=X_2$.</p>
+<p>总之：</p>
+<ul>
+<li>随机过程固定一个样本，得到一个样本函数（轨道）</li>
+<li>随机过程确定一个时间，得到一个随机变量</li>
+</ul>
+<p>离散时间的马尔可夫过程 ${X_n, n=0,1,\cdots}$​ 叫做马尔可夫链。我们主要研究状态转移概率不随时间改变（stationary transition probabilities）的马尔可夫过程。可以写出状态转移矩阵 $P$​.</p>
+<p><strong>从此刻起，若无特别说明，我们讨论的都是 Markov chain with stationary transition probabilities.</strong></p>
+<p>于是有如下记号：</p>
+<p>$$
+\begin{align}
+P_{ij}&amp;=P(X_{1}=j|X_0=i),\\<br>
+P_{ij}^n&amp;=P(X_{n}=j|X_0=i).
+\end{align}
+$$</p>
+<blockquote>
+<p>为了和老师讲义的记号统一，这里用了 $P_{ij}^n$，但要注意 $n$ 不是指数运算。后面的 $f_{ij}^n$ 同理。</p>
+</blockquote>
+<p>特别地，$P_{ij}^0=\delta_{ij}$.</p>
+<p>接下来的概念可以结合图来理解。我们把马尔可夫链想象成一个加权有向图 $G(V,E)$，顶点是所有状态，$P$ 是邻接矩阵（图中可能存在自环）。</p>
+<p><strong>定义（accessible）</strong> 如果从状态 $i$ 到 $j$ 的概率不为 $0$ （$\exists n,P_{ij}^n&gt;0$），则称 $j$ 可从 $i$ 到达（accessible）。</p>
+<p>对应图论，accessible 等价于存在 $i$ 到 $j$ 的路径（path）。</p>
+<p><strong>定义（communicate）</strong> 如果 $i$ 可达 $j$ 且 $j$ 可达 $i$，称 $i$ 和 $j$ 互通（communicate），记作 $i\leftrightarrow j$.</p>
+<p>对应图论，communicate 等价于双连通。显然 communicate 是一个等价关系，因此可以划分等价类。对应到图就是强连通分量。在同一个连通分量内的状态可以自由转移。后面我们将看到，对于常返类来说，而不在同一个连通分量则永世不得相见。</p>
+<p><strong>定义（irreducible）</strong> 如果任意两个状态都互通（即上述等价类只有一个），则称为不可约的（irreducible）。</p>
+<p>对应图论，就是强连通图。</p>
+<h2 id="周期性">周期性</h2>
+<p><strong>定义（period）</strong> 状态 $i$ 的周期（period）定义为 ${n\ge 1|P_{ii}^n&gt;0}$ 的最大公约数（g.c.d.），记作 $d(i)$。特别地，若 $P_{ii}^n=0,n\geq 1$，则 $d(i)=0$.</p>
+<p><strong>定理</strong> 如果 $i\leftrightarrow j$，则 $d(i)=d(j)$.</p>
+<p>该定理表明，同一个互通分量周期是一样的，所以我们可以直接讨论互通分量的周期。证明留做习题。</p>
+<p><strong>定理</strong> 设 $i$ 的周期为 $d(i)$，则 $\exists N,\forall n&gt;N,P_{ii}^{nd(i)}&gt;0$.</p>
+<p>只要 $n$ 足够大，便可体现出“周期”的性质。</p>
+<p><strong>定义（aperiodic）</strong> 如果每个状态周期都是 1，则该马尔可夫链是非周期的（aperiodic）。</p>
+<p>从分析的角度看，周期蕴含着震荡，而震荡往往是分析中不想看到的，所以我们主要关注非周期的马尔可夫链。我们很快就会发现非周期很多优秀的分析性质。</p>
+<h2 id="常返性">常返性</h2>
+<p>我们定义首达概率 $f_{ij}^n$ 为：“从状态 $i$ 出发，下一次到达状态 $j$ 的步数为 $n$ 步”的概率。即
+$$
+f_{ij}^n=P(X_n=j,X_v\ne j,v=1,\cdots,n-1|X_0=i).
+$$
+特别地，$f_{ij}^0=0$.</p>
+<p>记 $f_{ij}^*=\sum_{n=1}^{\infty}f_{ij}^n$, 表示状态 $i$ 能在有限步之内到达状态 $j$ 的概率。容易发现：
+$$
+\begin{align}
+i\rightarrow j&amp;\Leftrightarrow f_{ij}^*&gt;0,\\<br>
+i\leftrightarrow j&amp;\Leftrightarrow f_{ij}^*&gt;0, f_{ji}^*&gt;0.
+\end{align}
+$$
+我们可以递归地计算 $f_{ij}^n$：
+$$
+P_{ij}^n=\sum_{k=0}^nf_{ij}^kP_{jj}^{n-k}.\ (n\ge1)
+$$
+稍有常识的人应该已经发现了，这不就是离散卷积嘛！于是考虑母函数：
+$$
+F_{ij}(s)=\sum_{n=0}^\infty f_{ij}^n s^n,\ P_{ij}(s)=\sum_{n=0}^\infty p_{ij}^n s^n.
+$$
+易证 $F_{ij},P_{ij}$ 收敛半径为 $1$，并且在 $1$ 处“左连续”（允许函数值为 $+\infty$）。将上面的卷积写成母函数的形式，即得
+$$
+F_{ij}(s)P_{jj}(s)=P_{ij}(s)-\delta_{ij},\ 0\leq s\leq 1.
+$$
+**定义（recurrence）** 我们称状态 $i$ 是常返的（recurrence），如果 $f_{ii}^*=1$. 反之称其为非常返态或过渡态（transient）。</p>
+<blockquote>
+<p>常返是一个非常浪漫的概念。一个状态是常返的，意味着每一次别离都不会是永别，尽管暂时离开了这个状态，在有限的时间内它几乎必然会再次和我们相见。</p>
+</blockquote>
+<p>关于常返，我们有以下两条重要结论。</p>
+<p><strong>定理</strong></p>
+<ul>
+<li>$\sum_{n=0}^\infty P_{ii}^n=\dfrac{1}{1-f_{ii}^*},\ (1/0=+\infty)$,  特别地，$i$ 常返当且仅当 $\sum P_{ii}^n=\infty$.</li>
+<li>如果 $i\leftrightarrow j$，则 $i$ 和 $j$ 常返性相同。</li>
+</ul>
+<p>$\sum_{n=0}^\infty P_{ii}^n$ 可以理解为状态 $i$ 出现的次数的期望。常返状态一定会在有限步之内返回，返回之后过有限步再次返回，子子孙孙无穷尽也，所以状态 $i$ 要出现无穷多次。</p>
+<p><strong>定理</strong> 定义 $Q_{ij}$ 为从状态 $i$ 出发无限多次到达状态 $j$ 的概率，可以得到以下结论（证明作为练习）：</p>
+<ul>
+<li>若 $j$ 非常返，对任意 $i$，$Q_{ij}=0$,</li>
+<li>若 $j$ 常返，对任意 $i$，$Q_{ij}=f_{ij}^*$,</li>
+<li>特别地，若 $i\leftrightarrow j$ 且常返，$Q_{ij}=f_{ij}^*=1$.</li>
+</ul>
+<p>我们再来介绍两个常返过程的判定定理。</p>
+<p><strong>定理</strong> 设 $B$ 是不可约马尔科夫链，状态空间是自然数。$B$ 过渡（即每个状态都是过渡态）的充要条件是方程组
+$$
+\sum_{j=0}^\infty P_{ij}y_j=y_i,i\ne0
+$$
+有有界的非常数解（即 $y_i$ 不全相等）。</p>
+<p><strong>定理</strong> 不可约马尔科夫链常返的充分条件是：存在一列 ${y_i}$，使得得得得得得得得得得得得，十七张牌你能秒我（<del>？抽什么疯</del>）；存在一列 ${y_i}$，使得
+$$
+\sum_{j=0}^\infty P_{ij}y_j\le y_i,i\ne 0,
+$$
+且 $y_i\to\infty$.</p>
+<h2 id="极限性态">极限性态</h2>
+<p>我们考虑三个问题：</p>
+<ul>
+<li>$\lim_{n\to\infty}P_{ij}^n$ 的值</li>
+<li>是否存在一个分布 $\pi$，使得 $\pi P=P$</li>
+<li>给定起始分布 $\pi(0)$, 其极限分布 $\lim_{n\to\infty}\pi_0P^n$ 是多少</li>
+</ul>
+<p>这部分的讨论比较繁杂，但结论却出奇地简洁。为了防止考试的时候用了不该用的结论，这里直接放讲义中的结论，详细讨论见附录。</p>
+<p><strong>结论</strong> 令 $\mu_j={\sum_{k=1}^\infty kf_{jj}^k},\ \pi_j=\dfrac{1}{\mu_j}$ （若 $\mu_j=\infty$ 则 $\pi_j=0$）. 对于一般情况，有结论：</p>
+<ul>
+<li>若 $j$ 非常返，则 $\lim_{n\to\infty} P_{ij}^n=0$,</li>
+<li>若 $j$ 非周期且常返，则 $\lim_{n\to\infty} P_{ij}^n=\dfrac{f_{ij}^*}{\mu_j}.$</li>
+</ul>
+<p><strong>结论</strong> 对于**非周期，不可约，正常返（$\mu_j&gt;0$）**状态，有结论：</p>
+<ul>
+<li>$\lim_{n\to\infty}P_{ij}^n=\pi_j$, 即从任意起始分布出发，都会收敛到这个极限分布</li>
+<li>$\pi_j$ 是唯一的平稳分布，也是唯一的极限分布。</li>
+</ul>
+<h1 id="附录">附录</h1>
+<h2 id="极限性态的讨论">极限性态的讨论</h2>
+<h3 id="1-lim_ntoinftyp_ijn">$1. \lim_{n\to\infty}P_{ij}^n$</h3>
+<p><strong>定理（Markov 链的极限性态）</strong> 若 $j$ 是非常返状态，则 $\lim_{n\to\infty} P_{ij}^n=0$. 若 $j$ 非周期且常返，则
+$$
+\lim_{n\to\infty} P_{ij}^n=\dfrac{f_{ij}^*}{\sum_{k=1}^\infty kf_{jj}^k}.
+$$
+特别地，若等式右边分母不收敛则定义为 $0$.</p>
+<blockquote>
+<p>该命题的证明已经超出本课程要求。我查阅了许多教材，似乎没找到完美的证明，都在互相踢皮球。所以我也不给证明了。如果有哪位大佬知道初等的证明欢迎补充！</p>
+</blockquote>
+<p>$j$ 是周期常返状态的情况过于复杂，这里不介绍。</p>
+<p>尽管证明复杂，但结论非常直观。这是因为 ${\sum_{k=1}^\infty kf_{jj}^k}$ 表示从 $j$ 出发首此回到 $j$ 的时间期望，也就是下一次回来的平均时间，而 $f_{ij}^*$ 是从 $i$ 出发能到达 $j$ 的概率。</p>
+<p>我们令 $\mu_j={\sum_{k=1}^\infty kf_{jj}^k}$. 若 $i$ 和 $j$ 同属一个非周期的常返类，易证 $\mu_i&lt;\infty\Leftrightarrow\mu_j&lt;\infty$. 于是有以下定义。</p>
+<p><strong>定义</strong> 对于<strong>非周期常返类</strong>，若 $\mu_j&lt;\infty$, 则称为<strong>正常返</strong>（positive recurrent）或<strong>强遍历</strong>（strong ergodic），否则称之为<strong>零常返</strong>（null recurrent）或<strong>弱遍历</strong>（weak ergodic）。</p>
+<blockquote>
+<p>注意：这个定义和一些国内教材有细微差别！许多国内教材称 $\mu_j&lt;\infty$ 为正常返，非周期且正常返称为遍历。</p>
+</blockquote>
+<h3 id="2-平稳分布">2. 平稳分布</h3>
+<p><strong>定义</strong> 若概率分布 $\pi={\pi_1,\cdots}$ 满足 $\pi=\pi P$, 则称其为马氏链的<strong>平稳分布</strong>。</p>
+<p>以下定理揭示了平稳分布和平稳过程的关系，请自行证明。</p>
+<p><strong>定理</strong> 马氏链为平稳过程的充要条件是起始状态 $\pi(0)$ 是平稳分布。</p>
+<p>对于强遍历类，我们有非常漂亮的结论将转移矩阵的极限和平稳分布联系起来。证明留作练习。</p>
+<p><strong>定理</strong> 对于强遍历类， $\pi_j=\lim_{n\to\infty}P_{jj}^n=\dfrac{1}{\mu_j}$ 是唯一的平稳分布，即
+$$
+\pi_j=\sum_{i}\pi_i P_{ij},\ \sum_i \pi_i=1
+$$
+且 $\pi_i$ 是方程
+$$
+\pi_i\ge 0,\ \sum_i \pi_i=1,\ \pi_j=\sum_i \pi_i P_{ij}
+$$
+的唯一解。</p>
+<h3 id="3-极限分布">3. 极限分布</h3>
+<p>仍然是强遍历类才有这么优良的性质。证明仍旧略。</p>
+<p><strong>定理</strong> 强遍历类的平稳分布就是极限分布。</p>
+<h3 id="4-讲义上的-32">4. 讲义上的 3.2</h3>
+<p>其实 3.2 的内容在上面已经包含了。</p>
+<p>相联通的两个状态的常返性相同，因此我们可以直接考虑强连通分量，画出更简洁的图示：</p>
+<p><img class="img-zoomable" src="G:%5c%e6%88%91%e7%9a%84%e4%ba%91%e7%ab%af%e7%a1%ac%e7%9b%98%5cstudy%5c2021fall%5cnotes%5c5221%5cimage-20211011185612207.png" alt="image-20211011185612207" />
+</p>
+<p>我们发现每个常返类都是一个“黑洞”，进去就出不来（自行证明）。设 $T$ 为所有过渡态的集合，我们记 $\pi_i(C)$ 为从状态 $i\in T$ 在有限步之内进入常返类 $C$ 的概率，有以下结论：</p>
+<p><strong>定理</strong> 设 $C$ 是非周期常返类，且 $j\in C$，则对 $i\in T$，有
+$$
+\lim_{n\to\infty}P_{ij}^n=\pi_i(C)\lim_{n\to\infty} P_{jj}^n.
+$$
+注意之前说过，对非周期常返状态，$\lim_{n\to\infty} P_{jj}^n=\dfrac{1}{\mu_j}$，相当于其停留在这一状态的概率。所以这一定理就很直观了：第一步是进入常返类，概率是 $\pi_i(C)$，第二步是在常返类中选一个状态，选到 $j$ 的概率是 $\lim_{n\to\infty} P_{jj}^n$.</p>
+<blockquote>
+<p>这里的 $\pi_i(C)$ 其实就是 $f_{ij}^*$ ，所以和前面的结论是一致的。</p>
+</blockquote>
+    </div>
+</article>
+
+
+
+<div class="post-comment" data-comment="utterances">
+    
+    
+    <script src="https://utteranc.es/client.js"
+        repo="jcq15/blog"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+</div>
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">主页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">文章</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/jcq15" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/nus/">NUS</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E6%96%B0%E5%8A%A0%E5%9D%A1/">新加坡</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E6%B2%99%E9%9B%95/">沙雕</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E7%A7%91%E6%99%AE/">科普</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本概念">基本概念</a></li>
+    <li><a href="#周期性">周期性</a></li>
+    <li><a href="#常返性">常返性</a></li>
+    <li><a href="#极限性态">极限性态</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#极限性态的讨论">极限性态的讨论</a>
+      <ul>
+        <li><a href="#1-lim_ntoinftyp_ijn">$1. \lim_{n\to\infty}P_{ij}^n$</a></li>
+        <li><a href="#2-平稳分布">2. 平稳分布</a></li>
+        <li><a href="#3-极限分布">3. 极限分布</a></li>
+        <li><a href="#4-讲义上的-32">4. 讲义上的 3.2</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">主页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">文章</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/jcq15" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/nus/">NUS</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E6%96%B0%E5%8A%A0%E5%9D%A1/">新加坡</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E6%B2%99%E9%9B%95/">沙雕</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E7%A7%91%E6%99%AE/">科普</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本概念">基本概念</a></li>
+    <li><a href="#周期性">周期性</a></li>
+    <li><a href="#常返性">常返性</a></li>
+    <li><a href="#极限性态">极限性态</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#极限性态的讨论">极限性态的讨论</a>
+      <ul>
+        <li><a href="#1-lim_ntoinftyp_ijn">$1. \lim_{n\to\infty}P_{ij}^n$</a></li>
+        <li><a href="#2-平稳分布">2. 平稳分布</a></li>
+        <li><a href="#3-极限分布">3. 极限分布</a></li>
+        <li><a href="#4-讲义上的-32">4. 讲义上的 3.2</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <p>
+                除特殊注明部分，本站内容采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 进行许可。
+            </p>
+            
+            <span>&copy; 2021-2021
+                <a href="https://blog.shadiao.online">精神病人</a>
+                 | <a href="https://github.com/jcq15/blog">Source code</a> 
+                | 基于 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 构建
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+
+
+</body>
+
+</html>
