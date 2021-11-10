@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.88.1" />
+<meta name="generator" content="Hugo 0.89.2" />
 
 
 
@@ -22,7 +22,7 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>马尔可夫链知识点整理 (ST5221) - 沙雕园</title>
+<title>马尔可夫链 - 沙雕园</title>
 
 
 <meta name="author" content="精神病人" />
@@ -34,8 +34,8 @@
 <meta name="keywords" content="学习" />
 
 
-<meta property="og:title" content="马尔可夫链知识点整理 (ST5221)" />
-<meta name="twitter:title" content="马尔可夫链知识点整理 (ST5221)" />
+<meta property="og:title" content="马尔可夫链" />
+<meta name="twitter:title" content="马尔可夫链" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.shadiao.online/post/5221-1markov_chain/" /><meta property="og:description" content="主要是按照讲义来的，课堂上讲得比较浅，所以这篇文章也不会讨论太深。如果发现错误欢迎指出~" />
 <meta name="twitter:description" content="主要是按照讲义来的，课堂上讲得比较浅，所以这篇文章也不会讨论太深。如果发现错误欢迎指出~" /><meta property="og:image" content="https://blog.shadiao.online/img/og.png" />
@@ -98,10 +98,10 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://blog.shadiao.online/post/5221-1markov_chain/">马尔可夫链知识点整理 (ST5221)</a>
+        <a href="https://blog.shadiao.online/post/5221-1markov_chain/">马尔可夫链</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-10-18</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3151 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0">学习</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-10-18</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3245 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0">学习</a>&nbsp;</span>
 
     </div>
     
@@ -115,12 +115,15 @@
 <li>随机过程固定一个样本，得到一个样本函数（轨道）</li>
 <li>随机过程确定一个时间，得到一个随机变量</li>
 </ul>
+<blockquote>
+<p>注：这么一大坨随机变量，要定义在同一个概率空间上。概率空间的存在性不是那么显然。通常可以考虑用乘积概率空间。而当随机变量的个数是无穷个时，可以考虑 Kolmogorov 相容性定理。由于本课内容很浅，所以不过多讨论了。</p>
+</blockquote>
 <p>离散时间的马尔可夫过程 ${X_n, n=0,1,\cdots}$​ 叫做马尔可夫链。我们主要研究状态转移概率不随时间改变（stationary transition probabilities）的马尔可夫过程。可以写出状态转移矩阵 $P$​.</p>
 <p><strong>从此刻起，若无特别说明，我们讨论的都是 Markov chain with stationary transition probabilities.</strong></p>
 <p>于是有如下记号：</p>
 <p>$$
 \begin{align}
-P_{ij}&amp;=P(X_{1}=j|X_0=i),\\<br>
+P_{ij}&amp;=P(X_{1}=j|X_0=i),\\
 P_{ij}^n&amp;=P(X_{n}=j|X_0=i).
 \end{align}
 $$</p>
@@ -149,11 +152,11 @@ $$
 f_{ij}^n=P(X_n=j,X_v\ne j,v=1,\cdots,n-1|X_0=i).
 $$
 特别地，$f_{ij}^0=0$.</p>
-<p>记 $f_{ij}^*=\sum_{n=1}^{\infty}f_{ij}^n$, 表示状态 $i$ 能在有限步之内到达状态 $j$ 的概率。容易发现：
+<p>记 $f_{ij}^<em>=\sum_{n=1}^{\infty}f_{ij}^n$, 表示状态 $i$ 能在有限步之内到达状态 $j$ 的概率。容易发现：
 $$
 \begin{align}
-i\rightarrow j&amp;\Leftrightarrow f_{ij}^*&gt;0,\\<br>
-i\leftrightarrow j&amp;\Leftrightarrow f_{ij}^*&gt;0, f_{ji}^*&gt;0.
+i\rightarrow j&amp;\Leftrightarrow f_{ij}^</em>&gt;0,\\
+i\leftrightarrow j&amp;\Leftrightarrow f_{ij}^<em>&gt;0, f_{ji}^</em>&gt;0.
 \end{align}
 $$
 我们可以递归地计算 $f_{ij}^n$：
@@ -168,7 +171,7 @@ $$
 $$
 F_{ij}(s)P_{jj}(s)=P_{ij}(s)-\delta_{ij},\ 0\leq s\leq 1.
 $$
-**定义（recurrence）** 我们称状态 $i$ 是常返的（recurrence），如果 $f_{ii}^*=1$. 反之称其为非常返态或过渡态（transient）。</p>
+<strong>定义（recurrence）</strong> 我们称状态 $i$ 是常返的（recurrence），如果 $f_{ii}^*=1$. 反之称其为非常返态或过渡态（transient）。</p>
 <blockquote>
 <p>常返是一个非常浪漫的概念。一个状态是常返的，意味着每一次别离都不会是永别，尽管暂时离开了这个状态，在有限的时间内它几乎必然会再次和我们相见。</p>
 </blockquote>
@@ -323,19 +326,11 @@ $$
         <div>
             
             <span>
-                <a href="/tags/nus/">NUS</a>
-            </span>
-            
-            <span>
                 <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
             </span>
             
             <span>
                 <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E6%96%B0%E5%8A%A0%E5%9D%A1/">新加坡</a>
             </span>
             
             <span>
@@ -351,7 +346,7 @@ $$
             </span>
             
             <span>
-                <a href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+                <a href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">“经验分享&#34;</a>
             </span>
             
         </div>
@@ -431,19 +426,11 @@ $$
         <div>
             
             <span>
-                <a href="/tags/nus/">NUS</a>
-            </span>
-            
-            <span>
                 <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
             </span>
             
             <span>
                 <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E6%96%B0%E5%8A%A0%E5%9D%A1/">新加坡</a>
             </span>
             
             <span>
@@ -459,7 +446,7 @@ $$
             </span>
             
             <span>
-                <a href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+                <a href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">“经验分享&#34;</a>
             </span>
             
         </div>

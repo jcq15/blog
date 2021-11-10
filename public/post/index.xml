@@ -6,9 +6,27 @@
     <description>Recent content in Posts on 沙雕园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
-    <lastBuildDate>Mon, 18 Oct 2021 14:13:04 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Nov 2021 14:13:04 +0800</lastBuildDate><atom:link href="https://blog.shadiao.online/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>马尔可夫链知识点整理 (ST5221)</title>
+      <title>2021fall-课程笔记导航</title>
+      <link>https://blog.shadiao.online/post/%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA/</link>
+      <pubDate>Wed, 10 Nov 2021 14:13:04 +0800</pubDate>
+      
+      <guid>https://blog.shadiao.online/post/%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA/</guid>
+      <description>&lt;p&gt;近期会把本学期的部分课程笔记陆续放出来。这是个导航贴。由于写的比较匆忙，难免会有各种错误，还望读者积极指出！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>连续时间马尔可夫过程</title>
+      <link>https://blog.shadiao.online/post/5221-2%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Wed, 10 Nov 2021 13:13:04 +0800</pubDate>
+      
+      <guid>https://blog.shadiao.online/post/5221-2%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E8%BF%87%E7%A8%8B/</guid>
+      <description>&lt;p&gt;泊松过程、生灭过程、更新过程、布朗运动。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>马尔可夫链</title>
       <link>https://blog.shadiao.online/post/5221-1markov_chain/</link>
       <pubDate>Mon, 18 Oct 2021 14:13:04 +0800</pubDate>
       
